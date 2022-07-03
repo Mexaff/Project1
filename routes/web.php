@@ -21,14 +21,15 @@ Route::get('/', function () {
 
 
 
-Route::controller(AdminController::class)->group(function() {
+Route::controller(AdminController::class)->middleware(['auth'])->group(function() {
     Route::get('/admin/logout', 'destroy')->name('admin.logout');
     Route::get('/admin/profile', 'profile')->name('admin.profile');
+
     Route::post('/store/profile', 'storeProfile')->name('store.profile');
     Route::get('/edit/profile', 'editProfile')->name('edit.profile');
 
     Route::get('/edit/password', 'editPassword')->name('edit.password');
-    Route::post('/store/password', )->name('store.password');
+    Route::post('/store/password', 'storePassword')->name('store.password');
 });
 
 
